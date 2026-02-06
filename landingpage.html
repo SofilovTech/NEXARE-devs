@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcule Sua Média Universitária</title>
+  <link rel="stylesheet" href="ldpg.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="modo-escuro"> <button id="theme-toggle" class="theme-toggle">☀️</button>
+
+  <header>
+    <div class="logo">Nexashare 🎓</div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Descubra como calcular sua média universitária</h1>
+      <p>Ajuda gratuita para estudantes de todo o Brasil entenderem e calcularem suas médias com base nas regras de suas universidades.</p>
+      <a href="#calculadora" class="cta-button">Calcular Minha Média</a>
+    </div>
+  </section>
+
+  <section id="sobre" class="info-section">
+    <h2>O que é o Nexashare ?</h2>
+    <p>O <strong>Nexashare</strong> é uma plataforma feita para ajudar estudantes de universidades de todo o país a entender como funciona o cálculo da média final. 
+    Cada faculdade possui um método diferente — e aqui você descobre o seu, com explicações simples e exemplos práticos!</p>
+  </section>
+
+  <section id="como-funciona" class="info-section">
+    <h2>Como funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <span>1️⃣</span>
+        <h3>Pegue suas notas</h3>
+        <p>Confira sua avaliação e junte suas notas</p>
+      </div>
+      <div class="step">
+        <span>2️⃣</span>
+        <h3>Informe suas notas</h3>
+        <p>Digite suas avaliações</p>
+      </div>
+      <div class="step">
+        <span>3️⃣</span>
+        <h3>Veja o resultado</h3>
+        <p>Receba o cálculo de sua média e saiba o que precisa para ser aprovado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculadora" class="calculator-section">
+    <h2>Calcule seus benefícios com a nota do ENEM</h2>
+    <p>No momento só temos o cálculo com base no enem mas estamos desenvolvendo outras opções de consulta</p>
+
+    <div class="calculator">
+      <div class="enem-inputs-container">
+        <div class="input-group">
+          <label for="nota-ch">Ciências Humanas</label>
+          <input type="number" id="nota-ch" placeholder="Sua nota" min="0" max="1000">
+        </div>
+        <div class="input-group">
+          <label for="nota-cn">Ciências da Natureza</label>
+          <input type="number" id="nota-cn" placeholder="Sua nota" min="0" max="1000">
+        </div>
+        <div class="input-group">
+          <label for="nota-ling">Linguagens e Códigos</label>
+          <input type="number" id="nota-ling" placeholder="Sua nota" min="0" max="1000">
+        </div>
+        <div class="input-group">
+          <label for="nota-mat">Matemática</label>
+          <input type="number" id="nota-mat" placeholder="Sua nota" min="0" max="1000">
+        </div>
+        <div class="input-group">
+          <label for="nota-red">Redação</label>
+          <input type="number" id="nota-red" placeholder="Sua nota" min="0" max="1000">
+        </div>
+      </div>
+
+      <button id="calculate-enem">Verificar Descontos</button>
+
+      <div id="result-enem" class="result">
+        </div>
+    </div>
+  </section>
+
+  <footer id="contato">
+    <p>💬 Dúvidas? Fale conosco: <a href="mailto:sofiavitoriaconceicao@gmail.com">contato sofiavitoriaconceicao@gmail.com</a></p>
+    <p>©️ 2025 Nexashare - Feito com 💙 para estudantes brasileiros</p>
+  </footer> 
+
+  <script src="script.js"></script>
+</body>
+</html>

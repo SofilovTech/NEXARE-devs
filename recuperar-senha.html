@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaShare</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <button id="botao-tema">🌙</button>
+  
+  <div class="logotipo">
+    <img src="img/nexalogo.png" alt="Logo">
+  </div>
+
+  <div class="caixa-login">
+    <img src="img/nexalogo.png" alt="Logo" class="logotipo-pequeno">
+    <h2>Recuperar Senha</h2>
+    <p class="instrucao">Digite seu e-mail cadastrado para receber o link de recuperação</p>
+    <input type="email" placeholder="Digite seu e-mail" id="email-recuperacao">
+    <div class="erro" id="erro-email"></div>
+    <button class="botao-recuperar" id="btn-recuperar">Enviar Link de Recuperação</button>
+    <a href="login.html" class="link-voltar">Voltar para Login</a>
+    
+    <div id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;">
+      <p>✅ Link enviado com sucesso!</p>
+      <p>Verifique sua caixa de entrada e spam.</p>
+      <p>O link expira em 30 minutos.</p>
+    </div>
+  </div>
+
+  <script>
+    var botaoTema = document.getElementById('botao-tema');
+    var corpo = document.body;
+    var emailInput = document.getElementById('email-recuperacao');
+    var btnRecuperar = document.getElementById('btn-recuperar');
+    var mensagemSucesso = document.getElementById('mensagem-sucesso');
+
+    console.log('Elementos encontrados:', {
+      botaoTema: botaoTema,
+      emailInput: emailInput,
+      btnRecuperar: btnRecuperar
+    });
+
+    if(localStorage.getItem('tema') == 'escuro') {
+      corpo.classList.add('modo-escuro');
+      botaoTema.textContent = '\u2600\ufe0f';
+    }
+
+    botaoTema.onclick = function() {
+      corpo.classList.toggle('modo-escuro');
+      if(corpo.classList.contains('modo-escuro')) {
+        botaoTema.textContent = '\u2600\ufe0f';
+        localStorage.setItem('tema', 'escuro');
+      } else {
+        botaoTema.textContent = '\ud83c\udf19';
+        localStorage.setItem('tema', 'claro');
+      }
+    }
+
+    btnRecuperar.onclick = function() {
+      console.log('Botão recuperar clicado!');
+      var email = emailInput.value.trim();
+
+      document.getElementById('erro-email').textContent = '';
+
+      console.log('E-mail digitado:', email);
+
+      if(email == '') {
+        document.getElementById('erro-email').textContent = 'Por favor, digite seu e-mail.';
+        emailInput.focus();
+        return;
+      }
+
+      if(!validarEmail(email)) {
+        document.getElementById('erro-email').textContent = 'Por favor, digite um e-mail válido.';
+        emailInput.focus();
+        return;
+      }
+
+      btnRecuperar.classList.add('loading');
+      btnRecuperar.disabled = true;
+      btnRecuperar.textContent = 'Enviando...';
+
+      setTimeout(function() {
+        mensagemSucesso.style.display = 'block';
+        btnRecuperar.classList.remove('loading');
+        btnRecuperar.classList.add('success');
+        btnRecuperar.textContent = 'Link Enviado ✓';
+
+        console.log('Link de recuperação enviado para:', email);
+
+        setTimeout(function() {
+          window.location.href = 'login.html';
+        }, 5000);
+
+      }, 2000);
+    }
+
+    function validarEmail(email) {
+      var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    emailInput.addEventListener('keypress', function(e) {
+      if(e.key == 'Enter') {
+        btnRecuperar.click();
+      }
+    });
+  </script>
+</body>
+</html>
