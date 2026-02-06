@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaShare</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <button id="botao-tema">🌙</button>
+  
+  <div class="logotipo">
+    <img src="img/nexalogo.png" alt="Logo">
+  </div>
+
+  <div class="caixa-login">
+    <img src="img/nexalogo.png" alt="Logo" class="logotipo-pequeno">
+    <h2>Login</h2>
+  <input type="email" placeholder="Digite seu e-mail" id="email-login" required>
+    <div class="erro" id="erro-email"></div>
+    <input type="password" placeholder="Enter Password" id="senha-login">
+    <div class="erro" id="erro-senha"></div>
+    <a href="recuperar-senha.html">Esqueceu a senha?</a>
+  <button class="botao-entrar" id="btn-login">Login</button>
+  <a href="cadastro.html" class="botao-registrar">Registre-se</a>
+  </div>
+
+  <script>
+    var botaoTema = document.getElementById('botao-tema');
+    var corpo = document.body;
+    var emailLogin = document.getElementById('email-login');
+    var senhaLogin = document.getElementById('senha-login');
+    var btnLogin = document.getElementById('btn-login');
+
+    console.log('Elementos Login encontrados:', {
+      botaoTema: botaoTema,
+      emailLogin: emailLogin,
+      senhaLogin: senhaLogin,
+      btnLogin: btnLogin
+    });
+
+    if(localStorage.getItem('tema') == 'escuro') {
+      corpo.classList.add('modo-escuro');
+      botaoTema.textContent = '\u2600\ufe0f';
+    }
+
+    botaoTema.onclick = function() {
+      corpo.classList.toggle('modo-escuro');
+      if(corpo.classList.contains('modo-escuro')) {
+        botaoTema.textContent = '\u2600\ufe0f';
+        localStorage.setItem('tema', 'escuro');
+      } else {
+        botaoTema.textContent = '\ud83c\udf19';
+        localStorage.setItem('tema', 'claro');
+      }
+    }
+
+    btnLogin.onclick = function() {
+      // immediate redirect to landing page on click
+      var email = (emailLogin && emailLogin.value) ? emailLogin.value.trim() : '';
+  try { sessionStorage.setItem('userEmail', email); } catch(e) { /* ignore */ }
+  window.location.href = 'landingpage.html';
+    }
+
+    function validarEmail(email) {
+      var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    emailLogin.addEventListener('keypress', function(e) {
+      if(e.key == 'Enter') {
+        btnLogin.click();
+      }
+    });
+
+    senhaLogin.addEventListener('keypress', function(e) {
+      if(e.key == 'Enter') {
+        btnLogin.click();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,633 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    background-image: url(img/background.png);
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+  }
+
+  #botao-tema, #theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #botao-tema:hover, #theme-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .logotipo {
+    position: absolute;
+    top: 10px;
+    left: -30px;
+    animation: flutuar 3s infinite;
+  }
+
+  .logotipo img {
+    width: 300px;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    animation: logo-breathe 6s ease-in-out infinite;
+  }
+
+  .logotipo img:hover {
+    transform: scale(1.02) rotate(1deg);
+  }
+
+  /* ensure large left logo has consistent size across pages and scales on small screens */
+  @media (max-width: 1024px) {
+    .logotipo img {
+      width: 260px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logotipo img {
+      width: 180px;
+    }
+  }
+
+  .caixa-login {
+    width: 400px;
+    padding: 45px;
+    background: #c7ccd3;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    position: relative;
+    text-align: center;
+    transition: all 0.5s ease;
+  }
+
+  .logotipo-pequeno {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 85px;
+    transition: transform 0.3s ease;
+  }
+
+  .logotipo-pequeno:hover {
+    transform: scale(1.02) rotate(1deg);
+  }
+
+  .sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .form .logotipo-pequeno {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 85px;
+  }
+
+  /* adjust small logo inside caixa-login to overlap title a bit more to the right */
+  .caixa-login .logotipo-pequeno {
+    top: 8px;
+    right: -12px; /* move more to the right so it sits over the title */
+    width: 95px;
+    z-index: 6;
+    transform: translateZ(0);
+  }
+
+  @media (max-width: 480px) {
+    .caixa-login .logotipo-pequeno {
+      right: 8px; /* keep it inside viewport on small screens */
+      top: 10px;
+      width: 70px;
+    }
+  }
+
+  .form + .logotipo,
+  .logotipo {
+    z-index: 2;
+  }
+
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes logo-breathe {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.02) rotate(0.3deg); }
+    50% { transform: scale(1.03) rotate(0.6deg); }
+    75% { transform: scale(1.02) rotate(0.3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .logotipo { animation: none; }
+    .logotipo img { animation: none; transition: transform 0.15s ease; }
+  }
+
+  .form {
+    width: 540px;
+    padding: 45px;
+    min-height: 920px;
+    max-height: 95vh;
+    overflow-y: auto;
+    background: #c7ccd3;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    position: relative;
+    text-align: center;
+    transition: all 0.5s ease;
+  }
+
+  .form form {
+    padding: 12px 28px 28px 28px;
+  }
+
+  .form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .title h1 {
+    font-size: 26px;
+    color: #000000;
+  }
+
+  .login-button button {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .input-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .input-box { display: flex; flex-direction: column; }
+  .input-box label { margin-bottom: 6px; color: #000000; font-size: 14px; font-weight: 600; }
+
+  .gender-title h3 { font-size: 16px; color: #000000; margin-bottom: 6px; }
+  .gender-group label { font-size: 14px; color: #000000; cursor: pointer; }
+
+  body.modo-escuro .title h1,
+  body.modo-escuro .input-box label,
+  body.modo-escuro .gender-title h3,
+  body.modo-escuro .gender-group label {
+    color: #ffffff;
+  }
+
+  .input-box.tight-pair { margin-bottom: -30px; }
+  .input-box.tight-pair + .input-box { margin-top: 0; }
+
+  .input-box.lift { margin-top: -18px; margin-bottom: 6px; }
+  .continue-button.lift { margin-top: 50px; }
+  .gender-group label { font-size: 14px; color: #444; cursor: pointer; }
+  .gender-group input { margin-right: 6px; }
+
+  .input-box.lift { margin-top: -15px; margin-bottom: 8px; }
+  .continue-button.lift { margin-top: 0px; }
+  .continue-button { margin-top: 18px; text-align: center; }
+  .continue-button button {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: #fff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .continue-button button:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,123,255,0.12); }
+
+  /* link below the continue button on cadastro */
+  .have-account { color: #ffffff; margin-top: 12px; }
+  .have-account a { color: #ffffff; text-decoration: underline; font-weight: 600; }
+  .have-account a:hover { opacity: 0.9; }
+
+  body.modo-escuro .have-account,
+  body.modo-escuro .have-account a {
+    color: #ffffff;
+  }
+
+  @media (max-width: 760px) {
+    .input-group { grid-template-columns: 1fr; }
+    .form { max-width: 420px; }
+    .form form { padding: 20px; }
+  }
+
+  @media (max-width: 760px) {
+    .form { min-height: 620px; max-height: 85vh; }
+  }
+
+  @media (max-width: 480px) {
+    .form { min-height: 520px; max-height: 80vh; width: 95%; padding: 18px; }
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #d4d9df;
+    background: #f6f7f9;
+    font-size: 16px;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.12s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    -webkit-appearance: none;
+    appearance: none;
+    caret-color: #007bff;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.045);
+    transform: translateY(-1px);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9aa4b2;
+    opacity: 1;
+  }
+
+  input:invalid {
+    border-color: #dc3545;
+  }
+
+  .erro {
+    color: #dc3545;
+    font-size: 12px;
+    margin-bottom: 15px;
+    min-height: 18px;
+    padding-left: 5px;
+  }
+
+  body.modo-escuro .erro {
+    color: #ff6b6b;
+  }
+
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #007bff;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .botao-entrar {
+    width: 70%;
+    padding: 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 19px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .botao-entrar {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+  }
+
+  .botao-entrar:hover {
+    background: linear-gradient(45deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+  }
+
+  .botao-registrar {
+    display: inline-block;
+    width: 70%;
+    padding: 12px 14px;
+    margin: 8px 0 0 0;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    background: linear-gradient(45deg, #28a745, #218838);
+    border: 2px solid #1e7e34;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .botao-registrar:hover {
+    background: linear-gradient(45deg, #218838, #19692e);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(33,136,56,0.2);
+  }
+
+  /* recuperar senha button */
+  .botao-recuperar {
+    display: inline-block;
+    width: 70%;
+    padding: 12px 16px;
+    margin: 10px 0 6px 0;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(45deg, #28a745, #218838);
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    position: relative;
+    text-align: center;
+  }
+
+  .botao-recuperar:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(40,167,69,0.12); }
+
+  .botao-recuperar:disabled { opacity: 0.7; cursor: default; transform: none; }
+
+  .botao-recuperar.loading {
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  .botao-recuperar.loading::after {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255,255,255,0.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 1s linear infinite;
+  }
+
+  .botao-recuperar.success {
+    background: linear-gradient(45deg, #2ca84a, #1e7e34);
+    box-shadow: 0 10px 30px rgba(40,167,69,0.18);
+  }
+
+  @keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  body.modo-escuro {
+    background-image: url(img/backgrounddark.png);
+  }
+
+  body.modo-escuro #botao-tema {
+    background: #333;
+    color: white;
+    border-color: #555;
+  }
+
+  body.modo-escuro .form {
+    background: rgba(30,30,30,0.95);
+    border: 1px solid #444;
+  }
+
+  /* ensure login and recovery boxes are dark in dark mode */
+  body.modo-escuro .caixa-login,
+  body.modo-escuro .form {
+    background: rgba(20,20,20,0.95) !important;
+    border: 1px solid #333 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+    color: #fff;
+  }
+
+  body.modo-escuro .caixa-login input,
+  body.modo-escuro .caixa-login textarea,
+  body.modo-escuro .caixa-login select {
+    background: #2b2b2b;
+    border-color: #444;
+    color: #fff;
+  }
+
+  body.modo-escuro .caixa-login a,
+  body.modo-escuro .caixa-login .link-voltar {
+    color: #66b3ff;
+  }
+
+  body.modo-escuro h2 {
+    color: white;
+  }
+
+  body.modo-escuro input,
+  body.modo-escuro textarea,
+  body.modo-escuro select {
+    background: #444;
+    border-color: #555;
+    color: white;
+  }
+
+  body.modo-escuro input::placeholder,
+  body.modo-escuro textarea::placeholder,
+  body.modo-escuro select::placeholder {
+    color: #aaa;
+  }
+
+  body.modo-escuro a {
+    color: #66b3ff;
+  }
+
+  body.modo-escuro .botao-entrar {
+    background: linear-gradient(45deg, #0056b3, #003d82);
+  }
+
+  .link-voltar {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+
+  body.modo-escuro .link-voltar {
+    color: #66b3ff;
+  }
+
+  .instrucao {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  body.modo-escuro .instrucao {
+    color: #aaa;
+  }
+
+  .mensagem-sucesso {
+    margin-top: 20px;
+    padding: 15px;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    color: #155724;
+  }
+
+  .mensagem-sucesso p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  body.modo-escuro .mensagem-sucesso {
+    background: rgba(40, 167, 69, 0.2);
+    border-color: #28a745;
+    color: #5cb85c;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+
+    .logotipo {
+      top: 5px;
+      left: 5px;
+    }
+
+    .logotipo img {
+      width: 150px;
+    }
+
+    .form {
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .botao-entrar {
+      width: 80%;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    #botao-tema {
+      width: 45px;
+      height: 45px;
+      bottom: 15px;
+      left: 15px;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logotipo {
+      top: 2px;
+      left: 2px;
+    }
+
+    .logotipo img {
+      width: 120px;
+    }
+
+    .form { width: 95%; padding: 18px 12px; }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .botao-entrar {
+      width: 85%;
+      padding: 10px;
+      font-size: 14px;
+      margin: 3px;
+    }
+
+    a {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    #botao-tema {
+      width: 40px;
+      height: 40px;
+      bottom: 10px;
+      left: 10px;
+      font-size: 16px;
+    }
+  }
+
+  #botao-tema {
+    width: 40px;
+    height: 40px;
+    bottom: 10px;
+    left: 10px;
+    font-size: 16px;
+  }
+}
